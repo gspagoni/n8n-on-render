@@ -6,7 +6,7 @@ services:
     autoDeploy: true
     envVars:
       - key: N8N_HOST
-        value: n8n-on-render-e19d.onrender.com   # cambia con il tuo dominio render
+        value: n8n-on-render-e19d.onrender.com    # cambia con il tuo dominio render
       - key: N8N_PORT
         value: 5678
       - key: N8N_PROTOCOL
@@ -18,6 +18,6 @@ services:
       - key: N8N_BASIC_AUTH_PASSWORD
         value: superpassword   # scegli una password forte
       - key: N8N_USER_FOLDER
-        value: /home/node/.n8n
+        value: /.n8n
       - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
-        value: "false"
+        value: "false"        
