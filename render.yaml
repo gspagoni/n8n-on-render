@@ -9,3 +9,7 @@ services:
         value: 5678
       - key: N8N_HOST
         value: 0.0.0.0
+      - key: WEBHOOK_URL
+        value: https://n8n-on-render-e19d.onrender.com
+      - key: N8N_EDITOR_BASE_URL
+        value: https://n8n-on-render-e19d.onrender.com
