@@ -1,26 +1,23 @@
-# Usa immagine Node.js come base
-FROM node:18-alpine
+# Usa l'immagine ufficiale n8n con un approccio diverso
+FROM n8nio/n8n:latest
 
-# Installa n8n globalmente
-RUN npm install -g n8n
+# Imposta l'utente root temporaneamente per le configurazioni
+USER root
 
-# Crea utente e directory per n8n
-RUN addgroup -g 1000 n8nuser && \
-    adduser -u 1000 -G n8nuser -s /bin/sh -D n8nuser && \
-    mkdir -p /home/n8nuser/.n8n && \
-    chown -R n8nuser:n8nuser /home/n8nuser
+# Crea directory e imposta permessi
+RUN mkdir -p /.n8n && \
+    chmod 777 /.n8n && \
+    chmod 777 /usr/local/lib/node_modules/n8n
 
-# Passa all'utente n8n
-USER n8nuser
-
-# Imposta la directory di lavoro
-WORKDIR /home/n8nuser
+# Torna all'utente node
+USER node
 
 # Imposta variabili d'ambiente
-ENV N8N_USER_FOLDER=/home/n8nuser/.n8n
+ENV N8N_USER_FOLDER=/.n8n
+ENV NODE_OPTIONS="--max-old-space-size=2048"
 
-# Porta di default n8n
+# Espone la porta
 EXPOSE 5678
 
-# Avvia n8n
-CMD ["n8n", "start"]
+# Comando di avvio con percorso completo
+CMD ["/usr/local/bin/node", "/usr/local/lib/node_modules/n8n/bin/n8n", "start"]
