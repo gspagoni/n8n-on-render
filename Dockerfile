@@ -1,23 +1,13 @@
-# Usa l'immagine ufficiale n8n
-FROM n8nio/n8n:latest
+FROM node:22-alpine
 
-# Imposta l'utente root per configurare i permessi
-USER root
+# Installa n8n
+RUN npm install -g n8n
 
-# Crea la directory con permessi corretti
-RUN mkdir -p /.n8n && \
-    chown -R node:node /.n8n && \
-    chmod -R 755 /.n8n
+# Crea directory di lavoro
+WORKDIR /data
 
-# Torna all'utente node
-USER node
-
-# Imposta variabili d'ambiente
-ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
-ENV N8N_USER_FOLDER=/.n8n
-
-# Espone la porta
+# Espone porta
 EXPOSE 5678
 
-# Avvio con il comando originale dell'immagine
-CMD ["tini", "--", "/usr/local/bin/docker-entrypoint.sh", "n8n"]
+# Avvia n8n
+CMD ["n8n"]
