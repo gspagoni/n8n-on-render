@@ -19,5 +19,5 @@ ENV NODE_OPTIONS="--max-old-space-size=2048"
 # Espone la porta
 EXPOSE 5678
 
-# Comando di avvio con percorso completo
-CMD ["/usr/local/bin/node", "/usr/local/lib/node_modules/n8n/bin/n8n", "start"]
+# Comando di avvio con percorso corretto per l'immagine n8n
+CMD ["node", "/usr/local/lib/node_modules/n8n/bin/n8n", "start"]
